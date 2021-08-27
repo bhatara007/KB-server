@@ -2,9 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let productSchema = new Schema({
-    id: {
-        type: String
-    },
+    
     title: {
         type: String
     },
@@ -16,6 +14,9 @@ let productSchema = new Schema({
     },
     desc: {
         type: String
+    },
+    price: {
+        type: Number
     },
     available: {
         type: Boolean
