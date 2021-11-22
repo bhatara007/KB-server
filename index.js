@@ -6,7 +6,8 @@ const express = require("express"),
   mongoose = require("mongoose"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
-  productRoute = require("./routes/product.route");
+  productRoute = require("./routes/product.route"),
+  userRoute = require("./routes/user.route");
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -32,6 +33,8 @@ app.use(
 
 app.use(cors());
 app.use("/products", productRoute);
+app.use("/user", userRoute);
+
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

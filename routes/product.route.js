@@ -27,7 +27,7 @@ router.get('/:id', async ( req, res) => {
 })
 
 router.put('/update-product/:id', async ( req, res, next) => {
-    productSchema.findOneAndUpdate({_id:req.params.id}, {
+    await productSchema.findOneAndUpdate({_id:req.params.id}, {
         $set: req.body
     }, (error, data) => {
         res.json(data)
@@ -36,7 +36,7 @@ router.put('/update-product/:id', async ( req, res, next) => {
 })
 
 router.delete('/delete-product/:id', async (req, res, next) => {
-    productSchema.findOneAndDelete({_id:req.params.id}, (error, data) => {
+    await productSchema.findOneAndDelete({_id:req.params.id}, (error, data) => {
             res.status(200).json({
                 msg: data
             })
