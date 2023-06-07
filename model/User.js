@@ -10,4 +10,4 @@ const userSchema = new mongoose.Schema({
     order: {type: Array}
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('User', userSchema)

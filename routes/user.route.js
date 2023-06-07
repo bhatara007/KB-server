@@ -56,6 +56,8 @@ router.post("/login", async (req, res) => {
 
         const user = await User.findOne({email});
 
+        console.log(await bcrypt.compare(password, user.password))
+
         if (user && (await bcrypt.compare(password, user.password))){
 
             const token = jwt.sign(
@@ -70,6 +72,7 @@ router.post("/login", async (req, res) => {
 
             res.status(200).json(user)
         }else{
+            
             res.status(400).json("login failed")
         }
 
@@ -95,14 +98,16 @@ router.get('/get-user', auth, async (req, res) => {
 })
 
 router.put('/add-address', auth, async ( req, res, next) => {
-    await User.findOneAndUpdate(req.body._id, {
-        $set: req.body
+    await User.findOneAndUpdate({_id: req.body._id}, {
+        $set: {addr: req.body.addr}
     }, (error, data) => {
-        res.json(data)
+        if (error) {
+            console.log(error);
+            res.status(400).json(error);
+        }
         console.log("Address updated")
+        res.status(200).json(data);
     })
-
-    res.status(200).json(data)
 })
 
 module.exports = router

@@ -15,10 +15,18 @@ router.post ('/create-product', async (req, res, next) => {
 })
 
 router.get('/', async (req, res) => {
-    productSchema.find((error, data, next) => {
+    let filters = {}
+    const category = req.query.category;
+    if (category){
+        filters.category = category[0].toUpperCase() + category.slice(1);
+    }
+    productSchema.find(filters, (error, data, next) => {
+        console.log(data)
         res.json(data)
     })
 })
+
+
 
 router.get('/:id', async ( req, res) => {
     console.log(req.params.id)
